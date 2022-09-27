@@ -12,8 +12,7 @@
         private static readonly PolicyBuilder<HttpResponseMessage> _corePolicy = Policy<HttpResponseMessage>
             .Handle<HttpRequestException>()
             //.Or<TaskCanceledException>() // Uncomment this to handle timeouts
-            .OrResult(x => x.StatusCode is >= HttpStatusCode.InternalServerError or HttpStatusCode.RequestTimeout)
-            ;
+            .OrResult(x => x.StatusCode is >= HttpStatusCode.InternalServerError or HttpStatusCode.RequestTimeout);
 
         #region retry variants
 

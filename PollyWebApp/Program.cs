@@ -18,13 +18,14 @@ namespace PollyWebApp
             // No policies applied globally; any policies applied per operation in WeatherController
             builder.Services.AddHttpClient();
 
-            // All policies applied globally here - this is the recommended way of doing it FOR HTTP(S) CALLS
+            // //All policies applied globally here - this is the 'recommended' way of doing it for HTTP(S) calls
+            // //BUT may not handle timeouts in .Net >= 5 due to changes around TaskCancelledException
             //builder.Services
             //    .AddHttpClient(nameof(WeatherController)) // Must be a named client
             //    .AddTransientHttpErrorPolicy(pb =>
             //        pb.WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 5)));
 
-            // All policies applied globally here - this is to demo how you could use it for non-HTTP(S) calls
+            //  //All policies applied globally here - this is to demo how you could use it for non-HTTP(S) calls
             //builder.Services
             //    .AddHttpClient(nameof(WeatherController)) // Must be a named client
             //    .AddPolicyHandler(RetryPolicies.JitteredExponentialBackoffRetryPolicy);
