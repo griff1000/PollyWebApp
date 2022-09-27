@@ -2,7 +2,7 @@
 
 ## Overview
 
-Shows some examples of how to use Polly in an ASPNet (Core) MVC webapp calling an ASPNet (Core) WebAPI.
+Shows some examples of how to use Polly in an ASPNet (Core) MVC webapp calling an ASPNet (Core) WebAPI.  The app then builds on that to show the use of Polly for transient fault handling with any arbitrary service.
 
 ## To run the sample applications
 Ensure Visual Studio is set to run both projects at startup.  To do this, right click on the solution file and select "Set Startup Projects...".  This should look like:
