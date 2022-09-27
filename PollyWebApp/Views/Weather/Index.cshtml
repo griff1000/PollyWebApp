@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<WeatherForecastModel>
+@{
+    ViewData["Title"] = "Weather Page";
+}
+
+<h2>Hello from the Weather page</h2>
+<table class="table-bordered">
+    <tr>
+        <th class="col-1">Date</th>
+        <th class="col-2">Summary</th>
+        <th class="col-3">Temperature (C)</th>
+        <th class="col-4">Temperature (F)</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Date)</td>
+            <td>@Html.DisplayFor(modelItem => item.Summary)</td>
+            <td>@Html.DisplayFor(modelItem => item.TemperatureC)</td>
+            <td>@Html.DisplayFor(modelItem => item.TemperatureF)</td>
+        </tr>
+    }
+
+</table>
