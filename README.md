@@ -28,3 +28,8 @@ The PollyWebApp also has a "MyService" - an arbitrary implementation of a resour
 The code as checked in will not use Polly; there is commented out code that can be incrementally uncommented in order to add Polly functionality.  You will often have to comment out other code as you start uncommenting, since there will be multiple declarations of the same variable in different sections of commented out code.  However the checked in code will have transient faults in the 4th and 5th invocations of either the Weather API or MyService.
 
 The intention is to start demoing with no fault handling policy at all; then use the recommended way for HTTP clients; then break that down to understand what's going on in order to be able to generalize use of Polly for any kind of operation that could benefit from transient fault handling.
+
+## Notes
+1. Applying the HTTP policies globally in the Program.cs does NOT always have the same effect as using them directly to wrap an operation.  Specifically the exact same additional `.Or<TaskCanceledException>` addition works fine for the operation wrap but not for the global declaration.
+1. Be VERY careful about applying retry policies to non-idempotent operations.  Either be tolerant of failures (e.g. 409 Conflict), pass some kind of idempotency token to ensure the request isn't actually processed multiple times on the server, or just don't do it! 
+1. See [the Polly repo on GitHub](https://github.com/App-vNext/Polly) for more information
