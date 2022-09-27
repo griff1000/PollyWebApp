@@ -15,7 +15,7 @@ namespace PollyWebApp
 
             #region Adding the HTTP client
 
-            // All policies applied per operation in WeatherController
+            // No policies applied globally; any policies applied per operation in WeatherController
             builder.Services.AddHttpClient();
 
             // All policies applied globally here - this is the recommended way of doing it FOR HTTP(S) CALLS
