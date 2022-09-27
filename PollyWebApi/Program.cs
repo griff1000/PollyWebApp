@@ -28,8 +28,12 @@ namespace PollyWebApi
 
             app.UseAuthorization();
 
+            #region  You can add transient faults by enabling either or both of these middleware components
+
             app.UseFakeTransientErrorMiddleware();
             //app.UseFakeTransientSlowResponseMiddleware();
+
+            #endregion
 
             app.MapControllers();
 

@@ -7,7 +7,14 @@ namespace PollyWebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            #region Adding the HTTP client
+
             builder.Services.AddHttpClient();
+
+            #endregion
+
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();

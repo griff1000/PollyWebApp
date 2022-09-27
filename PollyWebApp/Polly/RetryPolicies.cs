@@ -6,6 +6,9 @@
 
     public static class RetryPolicies
     {
+        /// <summary>
+        /// Base PolicyBuilder that all the retry variants use.  This one is a policy for <see cref="HttpResponseMessage"/> operations and will handle <see cref="HttpRequestException"/> exceptions or non-exception results where the status code indicates a request timeout or any status code >= 500.  Since .Net 5, <see cref="TaskCanceledException"/> has been thrown by HttpClient if the call duration exceeds the configured timeout, so this can be enabled here too, demonstrating how a policy can handle multiple exception classes.
+        /// </summary>
         private static readonly PolicyBuilder<HttpResponseMessage> _corePolicy = Policy<HttpResponseMessage>
             .Handle<HttpRequestException>()
             //.Or<TaskCanceledException>() // Uncomment this to handle timeouts

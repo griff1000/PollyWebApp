@@ -2,6 +2,9 @@
 
 using System.Net;
 
+/// <summary>
+/// Returns internal server error responses for the 4th and 5th requests; regular responses all other times
+/// </summary>
 public class FakeTransientErrorMiddleware
 {
     private readonly RequestDelegate _next;
@@ -27,6 +30,9 @@ public class FakeTransientErrorMiddleware
 
 public static class FakeTransientErrorMiddlewareExtensions
 {
+    /// <summary>
+    /// Adds middleware that returns internal server error responses for the 4th and 5th requests; regular responses all other times
+    /// </summary>
     public static IApplicationBuilder UseFakeTransientErrorMiddleware(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<FakeTransientErrorMiddleware>();

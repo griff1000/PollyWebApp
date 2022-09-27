@@ -2,4 +2,14 @@
 
 Shows some examples of how to use Polly in an ASPNet (Core) MVC webapp calling an ASPNet (Core) WebAPI.
 
-The code as checked in will not use Polly; there is commented out code that can be incrementally uncommented in order to add Polly functionality.
+The PollyWebApi is a bog standard, out of the box "new ASP.NET Core WebAPI" project.  The template for this API includes a sample API controller that returns faked weather data.  The only thing that has been added is a few new middleware components that can be added to the pipeline to simulate transient errors.  Both these middleware components let the first three requests through unhindered, then affect the 4th and 5th calls, then leave all subsequent calls unhindered.
+
+The PollyWebApp is a bog standard, out of the box "ASP.NET Core Web App (Model-View-Controller)".  To that has been added a new WeatherForecastController with a single controller action that calls the PollyWebApi in order to get weather data.  This data is returned in a view which just displays the data in a table.  In addition there are a number of Polly retry policies defined that can be applied to the HttpClient calls in order to enable transient fault handling behaviour.
+
+[![](https://mermaid.ink/img/pako:eNqdkkFrwzAMhf-K8GljLSuMXsIIFNbBDhulHfSSixorrZljZbJCCKX_fQ5tt1HGDvXJxk96n569NyVbMpmJ9NlSKOnJ4VawLgKktWDv-zVtZk0zHuf53c_ZZbAcKqJCxQIdoe5IwKLisfSNlcBTpcDV7z4ZzANuPIGQSg8Ne1c6iqAMOww2XTxuBO5zUMEQHQUFEmGJUAnXMFu8HPtfAroLwGS0_htK3HZ3QeW-qZ7xg97PzvPB-NXZRNWhELgw-J8Bh7mnk8kJ7yqDleduSbHhEOlfH89hCzf5wzTepuCOBTFlYEamJqnR2fSE-4GhMGnmmgqTpa2lCluvhSnCIUnbJkVBc-uUxWQV-kgjg63yqg-lyVRaOotO3-CkOnwBdoi8-A)](https://mermaid.live/edit#pako:eNqdkkFrwzAMhf-K8GljLSuMXsIIFNbBDhulHfSSixorrZljZbJCCKX_fQ5tt1HGDvXJxk96n569NyVbMpmJ9NlSKOnJ4VawLgKktWDv-zVtZk0zHuf53c_ZZbAcKqJCxQIdoe5IwKLisfSNlcBTpcDV7z4ZzANuPIGQSg8Ne1c6iqAMOww2XTxuBO5zUMEQHQUFEmGJUAnXMFu8HPtfAroLwGS0_htK3HZ3QeW-qZ7xg97PzvPB-NXZRNWhELgw-J8Bh7mnk8kJ7yqDleduSbHhEOlfH89hCzf5wzTepuCOBTFlYEamJqnR2fSE-4GhMGnmmgqTpa2lCluvhSnCIUnbJkVBc-uUxWQV-kgjg63yqg-lyVRaOotO3-CkOnwBdoi8-A)
+
+Within the PollyWebApp, a Http client is added as recommended, i.e. by calling the AddHttpClient IServiceCollection extension method in the Program.cs class.  Some scenarios of enabling Polly add extra calls to that registration.  Then the WeatherController takes an instance of IHttpClientFactory in the constructor and creates HttpClients from that.  Some scenarios of enabling Polly add extra code in the controller which wrap the HttpClient calls.
+
+The code as checked in will not use Polly; there is commented out code that can be incrementally uncommented in order to add Polly functionality.  You will often have to comment out other code as you start uncommenting, since there will be multiple declarations of the same variable in different sections of commented out code.
+
+The intention is to start demoing with no fault handling policy at all; then use the recommended way for HTTP clients; then break that down to understand what's going on in order to be able to generalize use of Polly for any kind of operation that could benefit from transient fault handling.
