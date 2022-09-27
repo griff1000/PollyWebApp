@@ -16,7 +16,7 @@ public class FakeTransientSlowResponseMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         _requestCount++;
-        if (_requestCount > 3 && _requestCount < 6)
+        if (_requestCount is > 3 and < 6)
         {
             await Task.Delay(TimeSpan.FromSeconds(35));
         }

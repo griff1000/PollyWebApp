@@ -19,7 +19,7 @@ namespace PollyWebApp.Services
             await Task.Delay(100); // doing 'something'
 
             // Enable either of the next two lines to incur a 'transient' failure
-            if (_counter >3 && _counter < 6) throw new ApplicationException("Oops");
+            if (_counter is > 3 and < 6) throw new ApplicationException("Oops");
             //if (_counter > 3 && _counter < 6) return new SomeDtoModel { Content = returnContent, Status = 11 };
             return new SomeDtoModel{Content = returnContent, Status = index + 1};
         }

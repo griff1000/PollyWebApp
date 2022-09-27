@@ -42,7 +42,7 @@
 
         #endregion
 
-        #region retry variants for MyService
+        #region retry and other variants for MyService
 
         public static readonly IAsyncPolicy<SomeDtoModel> JitteredExponentialBackoffRetryPolicyForMyService = Policy<SomeDtoModel>
             .Handle<ApplicationException>()
@@ -50,6 +50,34 @@
             //.OrResult(x => x.Content.Contains("red")) // will stop "Fred" being returned and retry instead
             .WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 5));
 
-        #endregion  
+        /// <summary>
+        /// Wraps <see cref="JitteredExponentialBackoffRetryPolicyForMyService"/> with a fallback option if it doesn't work in 5 retries
+        /// </summary>
+        public static readonly AsyncPolicyWrap<SomeDtoModel> WrappedRetryAndFallbackPolicy = Policy<SomeDtoModel>
+            .Handle<ApplicationException>()
+            .FallbackAsync(GetBlankModel(), (result) => DoSomethingElseAsWell(result))
+            .WrapAsync(JitteredExponentialBackoffRetryPolicyForMyService);
+
+        #endregion
+
+        #region helper methods
+
+        /// <summary>
+        /// Just a sample method for the Fallback to call
+        /// </summary>
+        /// <returns></returns>
+        public static Task DoSomethingElseAsWell(DelegateResult<SomeDtoModel> result)
+        {
+            // As the great Quo once said - Whatever you want, Whatever you like...
+            // could log result.Exception for example
+            return Task.CompletedTask;
+        }
+
+        public static SomeDtoModel GetBlankModel()
+        {
+            return new SomeDtoModel{Content = "Bugger", Status = -1};
+        }
+
+        #endregion
     }
 }

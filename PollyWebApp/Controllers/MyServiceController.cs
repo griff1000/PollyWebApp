@@ -22,8 +22,9 @@
             try
             {
                 // Use the first call not to have any retry policy; use the second call to use the retry policy.
-                //someDto = await _myService.GetSome("Hello");
-                someDto = await RetryPolicies.JitteredExponentialBackoffRetryPolicyForMyService.ExecuteAsync(() => _myService.GetSome("Hello"));
+                someDto = await _myService.GetSome("Hello");
+                //someDto = await RetryPolicies.JitteredExponentialBackoffRetryPolicyForMyService.ExecuteAsync(() => _myService.GetSome("Hello"));
+                //someDto = await RetryPolicies.WrappedRetryAndFallbackPolicy.ExecuteAsync(() => _myService.GetSome("Hello"));
             }
             catch (ApplicationException)
             { }

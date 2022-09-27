@@ -18,7 +18,7 @@ public class FakeTransientErrorMiddleware
     public async Task InvokeAsync(HttpContext context)
     {
         _requestCount++;
-        if (_requestCount > 3 && _requestCount < 6)
+        if (_requestCount is > 3 and < 6)
         {
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             return;
