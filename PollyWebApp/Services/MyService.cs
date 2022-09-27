@@ -7,10 +7,9 @@ namespace PollyWebApp.Services
     /// </summary>
     public class MyService : IMyService
     {
-        private static int _counter = 0;
+        private static int _counter;
 
-        private static string[] names = new[]
-            { "Fred", "Barney", "Wilma", "Betty", "Pebbles", "BamBam", "Dino", "Mr Slate" };
+        private static string[] names = { "Fred", "Barney", "Wilma", "Betty", "Pebbles", "BamBam", "Dino", "Mr Slate" };
 
         public async Task<SomeDtoModel> GetSome(string content)
         {
@@ -22,7 +21,7 @@ namespace PollyWebApp.Services
             // Enable either of the next two lines to incur a 'transient' failure
             if (_counter >3 && _counter < 6) throw new ApplicationException("Oops");
             //if (_counter > 3 && _counter < 6) return new SomeDtoModel { Content = returnContent, Status = 11 };
-            return new SomeDtoModel{Content = returnContent, Status = index};
+            return new SomeDtoModel{Content = returnContent, Status = index + 1};
         }
     }
 }
