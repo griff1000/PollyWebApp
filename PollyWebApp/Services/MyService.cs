@@ -15,7 +15,7 @@ namespace PollyWebApp.Services
         public async Task<SomeDtoModel> GetSome(string content)
         {
             _counter++;
-            var index = new Random().Next(0, 8);
+            var index = Random.Shared.Next(0, 8);
             var returnContent = $"{content} {names[index]}";
             await Task.Delay(100); // doing 'something'
 
