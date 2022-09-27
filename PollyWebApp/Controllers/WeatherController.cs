@@ -20,7 +20,8 @@
         }
         public async Task<IActionResult> Index()
         {
-            var httpClient = _clientFactory.CreateClient();
+            // Note this gets a named client, which is needed for the AddPolicyHandler extension method to work
+            var httpClient = _clientFactory.CreateClient(nameof(WeatherController));
 
             // uncomment this Timeout setting in conjunction with turning on the slow response middleware in the API and uncommenting the .Or<TaskCanceledException>() line in the RetryPolicies
             //httpClient.Timeout = TimeSpan.FromSeconds(5); 

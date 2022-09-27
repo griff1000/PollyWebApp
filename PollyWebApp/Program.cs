@@ -1,5 +1,10 @@
 namespace PollyWebApp
 {
+    using Controllers;
+    using global::Polly;
+    using global::Polly.Contrib.WaitAndRetry;
+    using Polly;
+
     public class Program
     {
         public static void Main(string[] args)
@@ -10,7 +15,20 @@ namespace PollyWebApp
 
             #region Adding the HTTP client
 
+            // All policies applied per operation in WeatherController
             builder.Services.AddHttpClient();
+
+            // All policies applied globally here - this is the recommended way of doing it FOR HTTP(S) CALLS
+            //builder.Services
+            //    .AddHttpClient(nameof(WeatherController)) // Must be a named client
+            //    .AddTransientHttpErrorPolicy(pb =>
+            //        pb.WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 5)));
+            //.AddPolicyHandler(RetryPolicies.JitteredExponentialBackoffRetryPolicy)
+
+            // All policies applied globally here - this is to demo how you could use it for non-HTTP(S) calls
+            //builder.Services
+            //    .AddHttpClient(nameof(WeatherController)) // Must be a named client
+            //    .AddPolicyHandler(RetryPolicies.JitteredExponentialBackoffRetryPolicy);
 
             #endregion
 
