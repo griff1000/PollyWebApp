@@ -23,7 +23,6 @@ namespace PollyWebApp
             //    .AddHttpClient(nameof(WeatherController)) // Must be a named client
             //    .AddTransientHttpErrorPolicy(pb =>
             //        pb.WaitAndRetryAsync(Backoff.DecorrelatedJitterBackoffV2(TimeSpan.FromSeconds(1), 5)));
-            //.AddPolicyHandler(RetryPolicies.JitteredExponentialBackoffRetryPolicy)
 
             // All policies applied globally here - this is to demo how you could use it for non-HTTP(S) calls
             //builder.Services
