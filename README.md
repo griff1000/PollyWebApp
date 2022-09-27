@@ -5,9 +5,13 @@
 Shows some examples of how to use Polly in an ASPNet (Core) MVC webapp calling an ASPNet (Core) WebAPI.
 
 ## To run the sample applications
-Ensure Visual Studio is set to run both projects at startup.  To do this, right click on the solution file and select "Set Startup Projects...".  This should look like ![image](./MultipleStartupProjects.jpg)  
+Ensure Visual Studio is set to run both projects at startup.  To do this, right click on the solution file and select "Set Startup Projects...".  This should look like:
 
-When running the application, to hit the test code click on either the Weather or My Service links repeatedly as follows: ![image](./NavigatingTheUI.jpg)
+![image](./MultipleStartupProjects.jpg)  
+
+When running the application, to hit the test code click on either the Weather or My Service links repeatedly as follows: 
+
+![image](./NavigatingTheUI.jpg)
 
 ## Implementation detail
 
