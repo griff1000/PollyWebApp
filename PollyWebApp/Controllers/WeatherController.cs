@@ -6,7 +6,7 @@
     using System.Text.Json;
 
     /// <summary>
-    /// This is the class we are using to demo Polly
+    /// This is the class we are using to demo Polly for HttpClient calls
     /// </summary>
     public class WeatherController : Controller
     {

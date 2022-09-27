@@ -4,6 +4,7 @@ namespace PollyWebApp
     using global::Polly;
     using global::Polly.Contrib.WaitAndRetry;
     using Polly;
+    using Services;
 
     public class Program
     {
@@ -12,6 +13,8 @@ namespace PollyWebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddSingleton<IMyService, MyService>();
 
             #region Adding the HTTP client
 
