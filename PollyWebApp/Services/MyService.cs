@@ -27,7 +27,7 @@ namespace PollyWebApp.Services
 
             // Enable either of the next two lines to incur a 'transient' failure
             if (_counter is > 3 and < 6) throw new ApplicationException("Oops");
-            //if (_counter > 3 && _counter < 6) return new SomeDtoModel { Content = returnContent, Status = 11 };
+            if (_counter > 12 && _counter < 16) return new SomeDtoModel { Content = returnContent, Status = 11 };
             return new SomeDtoModel{Content = returnContent, Status = index + 1};
         }
     }
